@@ -1,0 +1,87 @@
+<#include "/macro.include"/>
+<#assign className = table.className>
+<#assign table = table>
+<#assign classNameFirstLower = table.classNameFirstLower>
+<#assign classNameLowerCase = className?lower_case>
+<#macro mapperEl value>${r"#{"}${value}}</#macro>
+<#macro namespace>${className}.</#macro>
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="${basepackage}.mapper.${className}Mapper">
+<resultMap id="BaseResultMap" type="${basepackage}.domain.${className}" >
+    <#list table.columns as column>
+    <#if column.pk>
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <#else>
+    <result column="${column.sqlName}" property="${column.columnNameLower}" jdbcType="${column.jdbcType}" />
+    </#if>
+    </#list>
+</resultMap>
+<sql id="Base_Column_List" >
+<#list table.columns as column>${column.sqlName}<#if column_has_next>,</#if></#list>
+</sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+      select
+      <include refid="Base_Column_List" />
+      from ${table.sqlName}
+      where id = <#noparse>#{id,jdbcType=INTEGER}</#noparse>
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+      select
+      <include refid="Base_Column_List" />
+      from ${table.sqlName}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+      delete from ${table.sqlName}
+      where id = <#noparse>#{id,jdbcType=INTEGER}</#noparse>
+  </delete>
+  <insert id="insertEntiy" parameterType="${basepackage}.domain.${className}" >
+      insert into ${table.sqlName} (<include refid="Base_Column_List" />)
+      values (<#list table.columns as column><#noparse>#{</#noparse>${column.columnNameLower},jdbcType=${column.jdbcType}<#noparse>}</#noparse><#if column_has_next>,
+        </#if></#list>)
+  </insert>
+  <insert id="insertSelective" parameterType="${basepackage}.domain.${className}" >
+      insert into ${table.sqlName}
+      <trim prefix="(" suffix=")" suffixOverrides="," >
+          <#list table.columns as column>
+          <if test="${column.columnNameLower} != null" >
+                ${column.sqlName},
+          </if>
+          </#list>
+      </trim>
+      <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <#list table.columns as column>
+          <if test="${column.columnNameLower} != null" >
+              <#noparse>#{</#noparse>${column.columnNameLower},jdbcType=${column.jdbcType}<#noparse>}</#noparse>,
+          </if>
+      </#list>
+      </trim>
+  </insert>
+  <insert id="insertBatch" parameterType="java.util.List">
+      insert into ${table.sqlName} (<include refid="Base_Column_List" />)
+      <foreach collection="${classNameFirstLower}s" item="item" separator="union all">
+          select
+          	<#list table.columns as column>	
+          	<#noparse>#{</#noparse>item.${column.columnNameLower},jdbcType=${column.jdbcType}<#noparse>}</#noparse><#if column_has_next>,</#if>
+</#list>
+          from dual
+      </foreach>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="${basepackage}.domain.${className}" >
+      update ${table.sqlName}
+      <set >
+          <#list table.columns as column><#if !column.pk>
+          <if test="${column.columnNameLower} != null" >
+              ${column.sqlName} = <#noparse>#{</#noparse>${column.columnNameLower},jdbcType=${column.jdbcType}<#noparse>}</#noparse>,
+          </if>
+      </#if></#list>
+      </set>
+      where id = <#noparse>#{id,jdbcType=INTEGER}</#noparse>
+  </update>
+  <update id="updateByPrimaryKey" parameterType="${basepackage}.domain.${className}" >
+      update ${table.sqlName}
+      set<#list table.columns as column><#if !column.pk>${column.sqlName} = <#noparse>#{</#noparse>${column.columnNameLower},jdbcType=${column.jdbcType}<#noparse>}</#noparse><#if column_has_next>,
+	</#if></#if>	</#list>
+      where id = <#noparse>#{id,jdbcType=INTEGER}</#noparse>
+  </update>
+</mapper>

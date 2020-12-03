@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+	<comment>
+		代码生成器配置文件: 
+		1.会为所有的property生成property_dir属性,如pkg=com.company => pkg_dir=com/company
+		2.Targets.java 提供了一些简便的方法不用配置dir_templates_root参数(非targets.generator()方法)
+	</comment>
+
+	<!-- 项目名称 -->
+	<entry key="appName">project</entry>
+
+	<!-- 项目的基本package -->
+	<entry key="basepackage">com.jns</entry>
+
+	<!-- jsp namespace: web/${namespace}/${className}/list.jsp -->
+	<entry key="namespace">pages</entry>
+
+	<!-- 需要移除的表名前缀,使用逗号进行分隔多个前缀,示例值: t_,v_ -->
+	<entry key="tableRemovePrefixes">RZ_,zd,xx_,jns_,res_,sys_,tb_</entry>
+
+	<!-- 数据库类型至java类型映射  -->
+	<entry key="java_typemapping.java.sql.Timestamp">java.util.Date</entry>
+	<entry key="java_typemapping.java.sql.Date">java.util.Date</entry>
+	<entry key="java_typemapping.java.sql.Time">java.util.Date</entry>	
+	<entry key="java_typemapping.java.lang.Byte">Integer</entry>
+	<entry key="java_typemapping.java.lang.Short">Integer</entry>
+	<entry key="java_typemapping.java.lang.Integer">Integer</entry>
+	<entry key="java_typemapping.java.lang.Long">Long</entry>
+	<entry key="java_typemapping.java.math.BigDecimal">Long</entry>
+	<entry key="java_typemapping.java.sql.Clob">String</entry>
+
+	<!-- 用于存放sequence列表，生成SeqDAO使用,使用空格，换行符分隔，示例值: seq_user seq_blog -->
+	<entry key="sequencesList">
+		seq_demo1 seq_demo2
+	</entry>
+
+	<!-- 模板包ROOT地址
+		项目内部: template/generator/rapid
+		项目外部: c:/some_demo_template.jar!/classpath
+	-->
+	<entry key="base_templates_root"></entry>
+	<entry key="dir_templates_root">/share/basic,/table/mybatis_plus,/table/vue_springmvc_rest</entry>
+
+	<!-- 代码的输出地址配置（相对地址&绝对地址都行） -->
+	<entry key="dir_out_root">out\\</entry>
+		<entry key="jdbc_url">jdbc:mysql://192.168.3.200:3306/aitechmanager?serverTimezone=GMT%2B8&amp;allowMultiQueries=true</entry>
+		<entry key="jdbc_driver">com.mysql.jdbc.Driver</entry>
+		<entry key="jdbc_username">root</entry>
+		<entry key="jdbc_password">123456</entry>
+</properties>

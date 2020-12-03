@@ -1,0 +1,10 @@
+**/*.iml
+/.idea
+/jns-admin-server/*
+/daoAutomaticGeneration/*
+null
+**/webapp/apidoc/*
+**/target
+/jns-sso/src/main/resources/rebel.xml
+/jns-medal/src/.idea/
+/**/src/main/resources/rebel.xml

@@ -1,0 +1,2 @@
+import ${basepackage}.dao.model.*;
+
