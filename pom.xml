@@ -18,7 +18,7 @@
         <rapid-generator.version>4.0.6</rapid-generator.version>
         <rapid-generator-ext.version>4.0.6</rapid-generator-ext.version>
         <rapid-generator-template.version>4.0.6</rapid-generator-template.version>
-        <mysql-connector-java.version>5.1.47</mysql-connector-java.version>
+        <mysql-connector-java.version>8.0.16</mysql-connector-java.version>
         <ojdbc16.version>11.2.0.3</ojdbc16.version>
         <freemarker.version>2.3.16</freemarker.version>
         <commons-lang.version>2.5</commons-lang.version>
