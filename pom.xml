@@ -23,7 +23,7 @@
         <freemarker.version>2.3.16</freemarker.version>
         <commons-lang.version>2.5</commons-lang.version>
         <commons-collections.version>3.2.2</commons-collections.version>
-        <commons-io.version>1.4</commons-io.version>
+        <commons-io.version>2.7</commons-io.version>
         <!-- custom package version -->
         <generator-template.version>1.2.0-SNAPSHOT</generator-template.version>
         <!-- maven plugin version -->
